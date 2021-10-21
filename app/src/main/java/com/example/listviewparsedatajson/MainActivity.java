@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         userResult = new ArrayList<>();
-        adapterUser = new UserAdapter(userResult, this);
-        binding.rvUser.setLayoutManager(new LinearLayoutManager(this));
+        adapterUser = new UserAdapter(userResult, MainActivity.this);
+        binding.rvUser.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         binding.rvUser.setAdapter(adapterUser);
         fetchUser();
     }
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     userResult.addAll(response.body());
                     adapterUser.notifyDataSetChanged();
+                    Toast.makeText(MainActivity.this, userResult.get(0).getEmail(), Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<List<BaseResponse>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Error" + t.getLocalizedMessage(),
                         Toast.LENGTH_SHORT).show();
-                
+
             }
         });
     }
