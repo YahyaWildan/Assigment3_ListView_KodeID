@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     userResult.addAll(response.body());
                     adapterUser.notifyDataSetChanged();
+
                 }
             }
 
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<List<BaseResponse>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Error" + t.getLocalizedMessage(),
                         Toast.LENGTH_SHORT).show();
+                
             }
         });
     }
